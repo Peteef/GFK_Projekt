@@ -8,7 +8,7 @@ public:
 	Polygon(int* coordTab, int n, int r, int g, int b, int R, int G, int B);
 	~Polygon();
 
-	int* Get() override;
+	int* Get();
 
 	static const int ID = 4;
 

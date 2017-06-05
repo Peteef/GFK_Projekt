@@ -23,9 +23,9 @@ void FigureArray::AddLine(int x1, int y1, int x2, int y2, int r, int g, int b)
 	size++;
 }
 
-void FigureArray::AddCircle(int x, int y, int r, int g, int b, int R, int G, int B)
+void FigureArray::AddCircle(int x, int y, int radius, int r, int g, int b, int R, int G, int B)
 {
-	array.push_back(new Circle(x, y, r, g, b, R, G, B));
+	array.push_back(new Circle(x, y, radius, r, g, b, R, G, B));
 	size++;
 }
 

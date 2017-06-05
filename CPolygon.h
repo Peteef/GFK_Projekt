@@ -7,7 +7,7 @@ class CPolygon : public Figure
 public:
 	CPolygon(int x, int y, int radius, int n, int r, int g, int b, int R, int G, int B);
 
-	int* Get() override;
+	int* Get();
 
 	static const int ID = 5;
 

@@ -1,9 +1,10 @@
 #include "Circle.h"
 
-Circle::Circle(int x, int y, int r, int g, int b, int R, int G, int B)
+Circle::Circle(int x, int y, int radius, int r, int g, int b, int R, int G, int B)
 {
 	p.Set(x, y);
-
+    this->radius=radius;
+    
 	this->r = r;
 	this->g = g;
 	this->b = b;
@@ -15,16 +16,17 @@ Circle::Circle(int x, int y, int r, int g, int b, int R, int G, int B)
 
 int* Circle::Get()
 {
-	int tmp[9];
+	int tmp[10];
 	tmp[0] = ID;
 	tmp[1] = p.GetX();
 	tmp[2] = p.GetY();
-	tmp[3] = r;
-	tmp[4] = g;
-	tmp[5] = b;
-	tmp[6] = R;
-	tmp[7] = G;
-	tmp[8] = B;
+	tmp[3] = radius;
+	tmp[4] = r;
+	tmp[5] = g;
+	tmp[6] = b;
+	tmp[7] = R;
+	tmp[8] = G;
+	tmp[9] = B;
 
 	return tmp;
 }
