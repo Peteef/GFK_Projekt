@@ -25,3 +25,13 @@ int* Line::Get()
 	return tmp;
 }
 
+void Line::GetStream(std::ostream& ostr)
+{
+	int* data = Get();
+	for (int i = 0; i < 8; i++)
+	{
+		ostr << data[i] << " ";
+	}
+	delete[] data;
+}
+

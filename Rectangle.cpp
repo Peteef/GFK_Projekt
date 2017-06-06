@@ -16,7 +16,7 @@ Rectangle::Rectangle(int x1, int y1, int x2, int y2, int r, int g, int b, int R,
 
 int* Rectangle::Get()
 {
-	int tmp[11];
+	int* tmp = new int[11];
 	tmp[0] = ID;
 	tmp[1] = p1.GetX();
 	tmp[2] = p1.GetY();
@@ -30,4 +30,14 @@ int* Rectangle::Get()
 	tmp[10] = B;
 
 	return tmp;
+}
+
+void Rectangle::GetStream(std::ostream& ostr)
+{
+	int* data = Get();
+	for (int i = 0; i < 11; i++)
+	{
+		ostr << data[i] << " ";
+	}
+	delete[] data;
 }

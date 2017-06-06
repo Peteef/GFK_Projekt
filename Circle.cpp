@@ -16,7 +16,7 @@ Circle::Circle(int x, int y, int radius, int r, int g, int b, int R, int G, int 
 
 int* Circle::Get()
 {
-	int tmp[10];
+	int* tmp = new int[10];
 	tmp[0] = ID;
 	tmp[1] = p.GetX();
 	tmp[2] = p.GetY();
@@ -29,4 +29,14 @@ int* Circle::Get()
 	tmp[9] = B;
 
 	return tmp;
+}
+
+void Circle::GetStream(std::ostream& ostr)
+{
+	int* data = Get();
+	for (int i = 0; i < 10; i++)
+	{
+		ostr << data[i] << " ";
+	}
+	delete[] data;
 }

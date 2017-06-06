@@ -8,6 +8,7 @@ public:
 	CPolygon(int x, int y, int radius, int n, int r, int g, int b, int R, int G, int B);
 
 	int* Get();
+	void GetStream(std::ostream& ostr);
 
 	static const int ID = 5;
 

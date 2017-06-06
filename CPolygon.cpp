@@ -46,3 +46,8 @@ int* CPolygon::Get()
 
 	return tmp;
 }
+
+void CPolygon::GetStream(std::ostream& ostr)
+{
+	ostr << ID << " " << p.GetX() << " " << p.GetY() << " " << radius << " " << n << " " << r << " " << g << " " << b << " " << R << " " << G << " " << B;
+}

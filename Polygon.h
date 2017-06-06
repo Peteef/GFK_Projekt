@@ -9,6 +9,7 @@ public:
 	~Polygon();
 
 	int* Get();
+	void GetStream(std::ostream& ostr);
 
 	static const int ID = 4;
 

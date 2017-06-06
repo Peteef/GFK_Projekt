@@ -22,7 +22,8 @@ public:
 	int Size() const;
 
 	//Zapis i odczyt
-
+	void SaveToFile(std::string path);
+	void LoadFromFile(std::string path);
 
 private:
 	std::vector<Figure*> array;

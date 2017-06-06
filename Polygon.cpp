@@ -48,4 +48,14 @@ int* Polygon::Get()
 	return tmp;
 }
 
+void Polygon::GetStream(std::ostream& ostr)
+{
+	int* data = Get();
+	for (int i = 0; i < 2 * n + 8; i++)
+	{
+		ostr << data[i] << " ";
+	}
+	delete[] data;
+}
+
 
