@@ -512,6 +512,7 @@ void Project1Frm::WxListBox1DoubleClicked(wxCommandEvent& event)
 void Project1Frm::WxListBox2DoubleClicked(wxCommandEvent& event)
 {
 	// insert your code here
+	WxListBox2->Deselect(WxListBox2->GetSelection());
 }
 
 /*
@@ -520,7 +521,7 @@ void Project1Frm::WxListBox2DoubleClicked(wxCommandEvent& event)
 void Project1Frm::WxListBox2Selected(wxCommandEvent& event)
 {
 	// insert your code here
-	WxListBox2->Deselect(WxListBox2->GetSelection());
+	
 }
 void Project1Frm::Panel_mouse_motion(wxMouseEvent& event)
 {
