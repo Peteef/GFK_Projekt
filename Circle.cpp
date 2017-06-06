@@ -2,33 +2,21 @@
 
 Circle::Circle(int x, int y, int radius, int r, int g, int b, int R, int G, int B)
 {
-	p.Set(x, y);
-    this->radius=radius;
-    
-	this->r = r;
-	this->g = g;
-	this->b = b;
-
-	this->R = R;
-	this->G = G;
-	this->B = B;
+	data[0] = ID;
+	data[1] = x;
+	data[2] = y;
+	data[3] = radius;
+	data[4] = r;
+	data[5] = g;
+	data[6] = b;
+	data[7] = R;
+	data[8] = G;
+	data[9] = B;
 }
 
 int* Circle::Get()
 {
-	int* tmp = new int[10];
-	tmp[0] = ID;
-	tmp[1] = p.GetX();
-	tmp[2] = p.GetY();
-	tmp[3] = radius;
-	tmp[4] = r;
-	tmp[5] = g;
-	tmp[6] = b;
-	tmp[7] = R;
-	tmp[8] = G;
-	tmp[9] = B;
-
-	return tmp;
+	return data;
 }
 
 void Circle::GetStream(std::ostream& ostr)
@@ -38,5 +26,4 @@ void Circle::GetStream(std::ostream& ostr)
 	{
 		ostr << data[i] << " ";
 	}
-	delete[] data;
 }

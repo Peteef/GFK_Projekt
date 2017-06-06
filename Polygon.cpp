@@ -17,6 +17,25 @@ Polygon::Polygon(int* coordTab, int n, int r, int g, int b, int R, int G, int B)
 	this->R = R;
 	this->G = G;
 	this->B = B;
+	
+    data = new int[2 * n + 8];
+	
+	data[0] = ID;
+	data[1] = n;
+
+	for(int i = 1; i <= n; i++)
+	{
+		data[2 * i] = nodes[i - 1].GetX();
+		data[2 * i + 1] = nodes[i - 1].GetY();
+	}
+
+	data[2 * n + 2] = r;
+	data[2 * n + 3] = g;
+	data[2 * n + 4] = b;
+
+	data[2 * n + 5] = R;
+	data[2 * n + 6] = G;
+	data[2 * n + 7] = B;
 }
 
 Polygon::~Polygon()
@@ -26,26 +45,7 @@ Polygon::~Polygon()
 
 int* Polygon::Get()
 {
-	int* tmp = new int[2 * n + 8];
-	
-	tmp[0] = ID;
-	tmp[1] = n;
-
-	for(int i = 1; i <= n; i++)
-	{
-		tmp[2 * i] = nodes[i - 1].GetX();
-		tmp[2 * i + 1] = nodes[i - 1].GetY();
-	}
-
-	tmp[2 * n + 2] = r;
-	tmp[2 * n + 3] = g;
-	tmp[2 * n + 4] = b;
-
-	tmp[2 * n + 5] = R;
-	tmp[2 * n + 6] = G;
-	tmp[2 * n + 7] = B;
-
-	return tmp;
+	return data;
 }
 
 void Polygon::GetStream(std::ostream& ostr)
@@ -57,5 +57,3 @@ void Polygon::GetStream(std::ostream& ostr)
 	}
 	delete[] data;
 }
-
-

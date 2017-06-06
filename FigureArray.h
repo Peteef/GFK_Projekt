@@ -10,6 +10,7 @@ public:
 	FigureArray();
 
 	std::vector<Figure*> Get() const;
+	Figure* operator[](int index);
 
 	//Settery
 	void AddLine(int x1, int y1, int x2, int y2, int r, int g, int b);

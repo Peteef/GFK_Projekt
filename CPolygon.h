@@ -18,4 +18,5 @@ private:
 	int n;
 	int r, g, b;
 	int R, G, B;
+	int* data;
 };

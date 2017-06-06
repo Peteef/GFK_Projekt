@@ -10,12 +10,10 @@ public:
 
 	int* Get();
 	void GetStream(std::ostream& ostr);
-
+    
 	static const int ID = 1;
 
 private:
-	Point p1;
-	Point p2;
-	int r, g, b;
+	int data[8];
 };
 

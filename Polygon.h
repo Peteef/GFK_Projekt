@@ -14,6 +14,7 @@ public:
 	static const int ID = 4;
 
 private:
+    int* data;
 	Point* nodes;
 	int n;
 	int r, g, b;

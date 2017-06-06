@@ -2,27 +2,19 @@
 
 Line::Line(int x1, int y1, int x2, int y2, int r, int g, int b)
 {
-	p1.Set(x1, y1);
-	p2.Set(x2, y2);
-
-	this->r = r;
-	this->g = g;
-	this->b = b;
+    data[0] = ID;
+	data[1] = x1;
+	data[2] = y1;
+	data[3] = x2;
+	data[4] = y2;
+	data[5] = r;
+	data[6] = g;
+	data[7] = b;
 }
 
 int* Line::Get()
 {
-	int* tmp = new int[8];
-	tmp[0] = ID;
-	tmp[1] = p1.GetX();
-	tmp[2] = p1.GetY();
-	tmp[3] = p2.GetX();
-	tmp[4] = p2.GetY();
-	tmp[5] = r;
-	tmp[6] = g;
-	tmp[7] = b;
-
-	return tmp;
+	return data;
 }
 
 void Line::GetStream(std::ostream& ostr)
@@ -32,6 +24,5 @@ void Line::GetStream(std::ostream& ostr)
 	{
 		ostr << data[i] << " ";
 	}
-	delete[] data;
+	//delete[] data;
 }
-

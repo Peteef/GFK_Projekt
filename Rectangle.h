@@ -13,6 +13,7 @@ public:
 	static const int ID = 3;
 
 private:
+    int data[11];
 	Point p1;
 	Point p2;
 	int r, g, b;

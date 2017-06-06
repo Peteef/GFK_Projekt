@@ -13,8 +13,5 @@ public:
 	static const int ID = 2;
 
 private:
-	Point p;
-	int radius;
-	int r, g, b;
-	int R, G, B;
+	int data[10];
 };

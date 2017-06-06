@@ -9,6 +9,7 @@
 #include "Polygon.h"
 #include "CPolygon.h"
 #include <fstream>
+#include <iostream>
 
 FigureArray::FigureArray()
 {
@@ -57,7 +58,8 @@ int FigureArray::Size() const
 
 void FigureArray::SaveToFile(std::string path)
 {
-	std::ofstream file(path);
+    const char * path_char = path.c_str();
+	std::ofstream file(path_char);
 
 	file << size << "\n";
 	for(int i = 0; i < size; i++)
@@ -70,7 +72,8 @@ void FigureArray::SaveToFile(std::string path)
 
 void FigureArray::LoadFromFile(std::string path)
 {
-	std::ifstream file(path);
+    const char * path_char = path.c_str();
+	std::ifstream file(path_char);
 
 	int nfigs;
 	file >> nfigs;
@@ -143,4 +146,9 @@ void FigureArray::LoadFromFile(std::string path)
 			break;
 		}
 	}
+}
+
+Figure* FigureArray::operator[](int index)
+{
+    return array[index];
 }
