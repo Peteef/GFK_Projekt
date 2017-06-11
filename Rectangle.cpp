@@ -27,5 +27,4 @@ void Rectangle::GetStream(std::ostream& ostr)
 	{
 		ostr << data[i] << " ";
 	}
-	delete[] data;
 }

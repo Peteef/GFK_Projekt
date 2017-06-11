@@ -24,5 +24,4 @@ void Line::GetStream(std::ostream& ostr)
 	{
 		ostr << data[i] << " ";
 	}
-	//delete[] data;
 }

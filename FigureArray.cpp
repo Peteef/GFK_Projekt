@@ -10,6 +10,7 @@
 #include "CPolygon.h"
 #include <fstream>
 #include <iostream>
+#include "BCurve.h"
 
 FigureArray::FigureArray()
 {
@@ -50,6 +51,13 @@ void FigureArray::AddCPolygon(int x, int y, int radius, int n, int r, int g, int
 	array.push_back(new CPolygon(x, y, radius, n, r, g, b, R, G, B));
 	size++;
 }
+
+void FigureArray::AddBCurve(int* coordTab, int n, int r, int g, int b)
+{
+	array.push_back(new BCurve(coordTab, n, r, g, b));
+	size++;
+}
+
 
 int FigureArray::Size() const
 {
@@ -142,6 +150,25 @@ void FigureArray::LoadFromFile(std::string path)
 			AddCPolygon(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]);
 			break;
 		}
+		case 6:
+		{
+			int n;
+			file >> n;
+
+			int* coordTab = new int[2 * n];
+			int data[3];
+			for (int i = 0; i < 2 * n; i++)
+			{
+				file >> coordTab[i];
+			}
+			for (int i = 0; i < 3; i++)
+			{
+				file >> data[i];
+			}
+			AddBCurve(coordTab, n, data[0], data[1], data[2]);
+			delete[] coordTab;
+			break;
+		}
 		default:
 			break;
 		}
@@ -152,3 +179,4 @@ Figure* FigureArray::operator[](int index)
 {
     return array[index];
 }
+

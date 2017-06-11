@@ -14,8 +14,4 @@ public:
 
 private:
     int data[11];
-	Point p1;
-	Point p2;
-	int r, g, b;
-	int R, G, B;
 };

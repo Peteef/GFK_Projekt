@@ -3,20 +3,11 @@
 Polygon::Polygon(int* coordTab, int n, int r, int g, int b, int R, int G, int B)
 {
 	nodes = new Point[n];
-	this->n = n;
 
 	for(int i = 0; i < n; i++)
 	{
 		nodes[i].Set(coordTab[2 * i], coordTab[2 * i + 1]);
 	}
-
-	this->r = r;
-	this->g = g;
-	this->b = b;
-
-	this->R = R;
-	this->G = G;
-	this->B = B;
 	
     data = new int[2 * n + 8];
 	
@@ -41,6 +32,7 @@ Polygon::Polygon(int* coordTab, int n, int r, int g, int b, int R, int G, int B)
 Polygon::~Polygon()
 {
 	delete[] nodes;
+	delete[] data;
 }
 
 int* Polygon::Get()
@@ -51,9 +43,8 @@ int* Polygon::Get()
 void Polygon::GetStream(std::ostream& ostr)
 {
 	int* data = Get();
-	for (int i = 0; i < 2 * n + 8; i++)
+	for (int i = 0; i < 2 * data[1] + 8; i++)
 	{
 		ostr << data[i] << " ";
 	}
-	delete[] data;
 }

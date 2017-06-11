@@ -16,7 +16,4 @@ public:
 private:
     int* data;
 	Point* nodes;
-	int n;
-	int r, g, b;
-	int R, G, B;
 };
