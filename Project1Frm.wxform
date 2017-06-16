@@ -715,45 +715,13 @@ object frmNewForm: TfrmNewForm
         Wx_ControlOrientation = wxControlVertical
         Wx_IDName = 'ID_WXBOXSIZER9'
         Wx_IDValue = 1079
-        object WxScrollBar1: TWxScrollBar
-          Left = 5
-          Top = 9
-          Width = 201
-          Height = 17
-          PageSize = 0
-          TabOrder = 0
-          Wx_Class = 'wxScrollBar'
-          Wx_ControlOrientation = wxControlVertical
-          Wx_Enabled = False
-          Wx_GeneralStyle = []
-          Wx_Hidden = False
-          Wx_IDName = 'ID_WXSCROLLBAR1'
-          Wx_IDValue = 1080
-          Wx_SBOrientation = wxSB_HORIZONTAL
-          Wx_PaneCaption = 'WxScrollBar1'
-          Wx_PaneName = 'WxScrollBar1_Pane'
-          Wx_Aui_Dock_Direction = wxAUI_DOCK_NONE
-          Wx_Aui_Dockable_Direction = []
-          Wx_Aui_Pane_Style = []
-          Wx_Aui_Pane_Buttons = []
-          Wx_BestSize_Height = 0
-          Wx_BestSize_Width = 0
-          Wx_MinSize_Height = 0
-          Wx_MinSize_Width = 0
-          Wx_MaxSize_Height = 0
-          Wx_MaxSize_Width = 0
-          Wx_Floating_Height = 0
-          Wx_Floating_Width = 0
-          Wx_Floating_X_Pos = 0
-          Wx_Floating_Y_Pos = 0
-        end
         object WxButton4: TWxButton
           Left = 216
           Top = 5
           Width = 75
           Height = 25
           Caption = 'Usu'#324
-          TabOrder = 1
+          TabOrder = 0
           EVT_BUTTON = 'WxButton4Click'
           Wx_BKColor = clBlack
           Wx_ButtonStyle = []

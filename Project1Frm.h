@@ -28,7 +28,6 @@
 ////Header Include Start
 #include <wx/filedlg.h>
 #include <wx/colordlg.h>
-#include <wx/scrolbar.h>
 #include <wx/richtext/richtextctrl.h>
 #include <wx/stattext.h>
 #include <wx/listbox.h>
@@ -97,7 +96,6 @@ class Project1Frm : public wxFrame
 		wxColourDialog *WxColourDialog1;
 		wxListBox *WxListBox2;
 		wxButton *WxButton4;
-		wxScrollBar *WxScrollBar1;
 		wxBoxSizer *WxBoxSizer9;
 		wxStaticText *WxStaticText3;
 		wxStaticText *WxStaticText2;
@@ -152,7 +150,6 @@ class Project1Frm : public wxFrame
 			////GUI Enum Control ID Start
 			ID_WXLISTBOX2 = 1075,
 			ID_WXBUTTON4 = 1081,
-			ID_WXSCROLLBAR1 = 1080,
 			ID_WXSTATICTEXT3 = 1074,
 			ID_WXSTATICTEXT2 = 1073,
 			ID_WXRICHTEXTCTRL1 = 1085,

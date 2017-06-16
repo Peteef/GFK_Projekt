@@ -153,10 +153,6 @@ void Project1Frm::CreateGUIControls()
 	WxBoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer9, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxScrollBar1 = new wxScrollBar(this, ID_WXSCROLLBAR1, wxPoint(5, 9), wxSize(201, 17), wxSB_HORIZONTAL, wxDefaultValidator, _("WxScrollBar1"));
-	WxScrollBar1->Enable(false);
-	WxBoxSizer9->Add(WxScrollBar1, 0, wxALIGN_CENTER | wxALL, 5);
-
 	WxButton4 = new wxButton(this, ID_WXBUTTON4, _("Usuñ"), wxPoint(216, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxButton4"));
 	WxBoxSizer9->Add(WxButton4, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -245,7 +241,7 @@ void Project1Frm::WxToggleButton1Click(wxCommandEvent& event)
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-        WxScrollBar1->Disable();
+        //WxScrollBar1->Disable();
     	wxString items[1]={"kolor lini"};
     	WxListBox1->Clear();
         WxListBox1->InsertItems(1,items,0);
@@ -271,7 +267,7 @@ void Project1Frm::WxToggleButton2Click(wxCommandEvent& event)
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-        WxScrollBar1->Disable();
+        //WxScrollBar1->Disable();
     	wxString items[2]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
         WxListBox1->InsertItems(2,items,0);
@@ -304,7 +300,7 @@ void Project1Frm::WxToggleButton3Click(wxCommandEvent& event)
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-        WxScrollBar1->Disable();
+        //WxScrollBar1->Disable();
     	wxString items[1]={"kolor lini"};
     	WxListBox1->Clear();
         WxListBox1->InsertItems(1,items,0);
@@ -329,7 +325,7 @@ void Project1Frm::WxToggleButton4Click(wxCommandEvent& event)
         WxToggleButton3->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-        WxScrollBar1->Disable();
+        //WxScrollBar1->Disable();
     	wxString items[5]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
         WxListBox1->InsertItems(2,items,0);
@@ -356,7 +352,7 @@ void Project1Frm::WxToggleButton5Click(wxCommandEvent& event)
         WxToggleButton3->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton6->SetValue(0);
-        WxScrollBar1->Disable();
+        //WxScrollBar1->Disable();
     	wxString items[2]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
         WxListBox1->InsertItems(2,items,0);
@@ -557,12 +553,13 @@ void Project1Frm::Draw()
                 else
                     dc2->SetBrush(*wxTRANSPARENT_BRUSH);
                 
-                for(int i = 1; i < n; i++)
+                wxPoint points[n];
+                for(int i=0;i<n;i++)
                 {
-                    dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
+                    points[i].x = data[(i+1)*2];
+                    points[i].y = data[(i+1)*2+1];
                 }
-                dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
-                
+                dc2->DrawPolygon(n,points);
                 //edycja
                 if(edit && WxListBox2->GetSelection()==i)
                 {
@@ -614,12 +611,14 @@ void Project1Frm::Draw()
                 else
                     dc2->SetBrush(*wxTRANSPARENT_BRUSH);
                 
-                for(int i = 1; i <n; i++)
+                wxPoint points[n];
+                for(int i=0;i<n;i++)
                 {
-                    dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
+                    points[i].x = data[(i+1)*2];
+                    points[i].y = data[(i+1)*2+1];
                 }
-                dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
-                
+                dc2->DrawPolygon(n,points);
+
                 //edycja
                 if(edit && WxListBox2->GetSelection()==i)
                 {
@@ -804,7 +803,7 @@ void Project1Frm::WxListBox2Selected(wxCommandEvent& event)
     WxToggleButton5->SetValue(0);
     WxToggleButton6->SetValue(0);
     WxListBox1->Clear();
-    WxScrollBar1->Enable();
+    //WxScrollBar1->Enable();
     Draw();
 	
 }
