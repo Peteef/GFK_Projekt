@@ -45,6 +45,8 @@ BEGIN_EVENT_TABLE(Project1Frm,wxFrame)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON6,Project1Frm::WxToggleButton6Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON2,Project1Frm::WxToggleButton2Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON1,Project1Frm::WxToggleButton1Click)
+	EVT_BUTTON(ID_WXBUTTON2,Project1Frm::WxButton2Click)
+	EVT_BUTTON(ID_WXBUTTON1,Project1Frm::WxButton1Click)
 	
 	EVT_UPDATE_UI(ID_WXPANEL1,Project1Frm::WxPanel1UpdateUI)
 END_EVENT_TABLE()
@@ -153,7 +155,7 @@ void Project1Frm::CreateGUIControls()
 	WxBoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer9, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxButton4 = new wxButton(this, ID_WXBUTTON4, _("Usuñ"), wxPoint(216, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxButton4"));
+	WxButton4 = new wxButton(this, ID_WXBUTTON4, _("Usuñ"), wxPoint(5, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxButton4"));
 	WxBoxSizer9->Add(WxButton4, 0, wxALIGN_CENTER | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxListBox2;
@@ -1444,4 +1446,45 @@ void Project1Frm::WxButton4Click(wxCommandEvent& event)
             WxListBox2->Delete(0);
     }
     Draw();
+}
+
+
+
+/*
+ * WxButton1Click
+ */
+void Project1Frm::WxButton1Click(wxCommandEvent& event)
+{
+	// insert your code here
+	wxString wxpath;
+    WxSaveFileDialog1->SetWildcard("array vector graphics files (*.avg)|*.avg");
+	if (WxSaveFileDialog1->ShowModal()==wxID_OK)
+	{
+        wxpath = WxSaveFileDialog1->GetPath();
+        
+	   std::string path = std::string(wxpath.mb_str());
+	   figure_array->SaveToFile(path);
+    }
+}
+
+/*
+ * WxButton2Click
+ */
+void Project1Frm::WxButton2Click(wxCommandEvent& event)
+{
+	// insert your code here
+	wxString wxpath;
+    WxOpenFileDialog1->SetWildcard("array vector graphics files (*.avg)|*.avg");
+	if (WxOpenFileDialog1->ShowModal()==wxID_OK)
+	{
+        wxpath=WxOpenFileDialog1->GetPath();
+        
+	   std::string path = std::string(wxpath.mb_str());
+	   
+       delete figure_array;
+	   figure_array = new FigureArray();
+	   figure_array->LoadFromFile(path);
+	   
+	   Draw();
+    }
 }

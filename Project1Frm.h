@@ -84,6 +84,8 @@ class Project1Frm : public wxFrame
 		void WxButton4Click(wxCommandEvent& event);
 		int Bezier_value(int* points, int n, double t);
 		int Newton_symbol(int n, int k);
+		void WxButton1Click(wxCommandEvent& event);
+		void WxButton2Click(wxCommandEvent& event);
 		
 		
 	private:
