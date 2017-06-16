@@ -166,6 +166,10 @@ void Project1Frm::CreateGUIControls()
 
 	WxColourDialog1 =  new wxColourDialog(this);
 
+	WxSaveFileDialog1 =  new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("*.*"), wxFD_SAVE);
+
+	WxOpenFileDialog1 =  new wxFileDialog(this, _("Choose a file"), _(""), _(""), _("*.*"), wxFD_OPEN);
+
 	SetTitle(_("Project1"));
 	SetIcon(wxNullIcon);
 	
@@ -211,12 +215,12 @@ void Project1Frm::WxButton3Click(wxCommandEvent& event)
 {
 	if (WxColourDialog1->ShowModal()==wxID_OK)
 	{
-        if(WxListBox1->IsEmpty())
+        /*if(WxListBox1->IsEmpty())
         {
             line_color = WxColourDialog1->GetColourData();
             //this->SetTitle(wxT("is empty"));
-        }
-        else if(WxToggleButton1->GetValue() && WxListBox1->GetSelection() == 0)
+        }*/
+        if(WxToggleButton1->GetValue() && WxListBox1->GetSelection() == 0)
             line_color = WxColourDialog1->GetColourData();
         else
         {
@@ -429,6 +433,7 @@ void Project1Frm::Draw()
                         line_pen.SetWidth(3);
                         wxPen pomPen(wxColour(255, 0, 0));
                         dc2->SetPen(pomPen);
+                        dc2->SetBrush(*wxTRANSPARENT_BRUSH);
                         dc2->DrawCircle(data[1], data[2], 10);
                         dc2->DrawCircle(data[3], data[4], 10);
                         dc2->DrawCircle((data[1]+data[3])/2, (data[2]+data[4])/2, 10);
@@ -455,6 +460,7 @@ void Project1Frm::Draw()
                         line_pen.SetWidth(3);
                         wxPen pomPen(wxColour(255, 0, 0));
                         dc2->SetPen(pomPen);
+                        dc2->SetBrush(*wxTRANSPARENT_BRUSH);
                         dc2->DrawCircle(data[1], data[2], 10);
                         dc2->DrawCircle(data[1]+data[3], data[2], 10);
                     }
@@ -490,6 +496,7 @@ void Project1Frm::Draw()
                         line_pen.SetWidth(3);
                         wxPen pomPen(wxColour(255, 0, 0));
                         dc2->SetPen(pomPen);
+                        dc2->SetBrush(*wxTRANSPARENT_BRUSH);
                         dc2->DrawCircle(data[1], data[2], 10);
                         dc2->DrawCircle(data[3], data[4], 10);
                         dc2->DrawCircle((data[1]+data[3])/2, (data[2]+data[4])/2, 10);
@@ -510,60 +517,78 @@ void Project1Frm::Draw()
                 }
                 break;
             case 4:
-                {
-                    int n = data[1];
-                    str="Polygon (";
-                    a=data[1];
-                    itoa(a, b, 10);
-                    str+= string(b) + ", ";
-                    //a=data[2];
-                    //itoa(a, c, 10);
-                    str+=string(c)+")";
-                    
-                    wxColour lcolour(data[5],data[6],data[7]);
-                    wxPen line_pen(lcolour);
-                    //edycja
-                    if(edit && WxListBox2->GetSelection()==i)
-                    {
-                        line_pen.SetWidth(3);
-                        wxPen pomPen(wxColour(255, 0, 0));
-                        dc2->SetPen(pomPen);
-                        dc2->DrawCircle(data[1], data[2], 10);
-                        dc2->DrawCircle(data[3], data[4], 10);
-                        dc2->DrawCircle(data[1]-data[3], data[2]-data[4], 10);
-                    }
-                        
-                    dc2->SetPen(line_pen);
-                    if(data[2*n+5]!=-1)
-                    {
-                        wxColour fcolour(data[2*n+5],data[2*n+6],data[2*n+7]);
-                        wxBrush fill_brush(fcolour);
-                        dc2->SetBrush(fill_brush);
-                    }
-                    else
-                        dc2->SetBrush(*wxTRANSPARENT_BRUSH);
-                    
-                    for(int i = 1; i < n; i++)
-                    {
-                        dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
-                    }
-                    dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
-                    
-                }
-                break;
-            case 5:
             {
                 int n = data[1];
-                /*str="Polygon (";
-                a=data[1];
+                str="Polygon (";
+                a=data[2];
                 itoa(a, b, 10);
-                str+= string(b) + ", ";*/
+                str+= string(b) + ", ";
+                a=data[3];
+                itoa(a, c, 10);
+                str+=string(c)+")";
                 
                 wxColour lcolour(data[2*n+2],data[2*n+3],data[2*n+4]);
                 wxPen line_pen(lcolour);
                 //edycja
                 if(edit && WxListBox2->GetSelection()==i)
+                {
                     line_pen.SetWidth(3);
+                    wxPen pomPen(wxColour(255, 0, 0));
+                    dc2->SetPen(pomPen);
+                    dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                    
+                    int x=0, y=0;
+                    for (int i=0; i<n; i++)
+                    {
+                        dc2->DrawCircle(data[2*i+2], data[2*i+3], 10);
+                        x+=data[2*i+2];
+                        y+=data[2*i+3];
+                    }
+                    dc2->DrawCircle(x/n, y/n, 10);
+                }
+                    
+                dc2->SetPen(line_pen);
+                if(data[2*n+5]!=-1)
+                {
+                    wxColour fcolour(data[2*n+5],data[2*n+6],data[2*n+7]);
+                    wxBrush fill_brush(fcolour);
+                    dc2->SetBrush(fill_brush);
+                }
+                else
+                    dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                
+                for(int i = 1; i < n; i++)
+                {
+                    dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
+                }
+                dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
+                
+            }
+            break;
+            case 5:
+            {
+                int n = data[1];
+                str="CPolygon (";
+                a=data[2];
+                itoa(a, b, 10);
+                str+= string(b) + ", ";
+                a=data[3];
+                itoa(a, c, 10);
+                str+=string(c)+")";
+                
+                wxColour lcolour(data[2*n+2],data[2*n+3],data[2*n+4]);
+                wxPen line_pen(lcolour);
+                
+                //edycja
+                if(edit && WxListBox2->GetSelection()==i)
+                {
+                    line_pen.SetWidth(3);
+                    wxPen pomPen(wxColour(255, 0, 0));
+                    dc2->SetPen(pomPen);
+                    dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                    dc2->DrawCircle(data[2], data[3], 10);
+                    dc2->DrawCircle(data[2*n+8], data[2*n+9], 10);
+                }
                     
                 dc2->SetPen(line_pen);
                 if(data[2*n+5]!=-1)
@@ -584,12 +609,34 @@ void Project1Frm::Draw()
             break;
             case 6:
             {
+                str="Bezier (";
+                a=data[2];
+                itoa(a, b, 10);
+                str+= string(b) + ", ";
+                a=data[3];
+                itoa(a, c, 10);
+                str+=string(c)+")";
+                
                 const int n=data[1];
                 wxColour lcolour(data[2*n+2],data[2*n+3],data[2*n+4]);
                 wxPen line_pen(lcolour);
                 //edycja
                 if(edit && WxListBox2->GetSelection()==i)
+                {
                     line_pen.SetWidth(3);
+                    wxPen pomPen(wxColour(255, 0, 0));
+                    dc2->SetPen(pomPen);
+                    dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                    
+                    int x=0, y=0;
+                    for (int i=0; i<n; i++)
+                    {
+                        dc2->DrawCircle(data[2*i+2], data[2*i+3], 10);
+                        x+=data[2*i+2];
+                        y+=data[2*i+3];
+                    }
+                    dc2->DrawCircle(x/n, y/n, 10);
+                }
                 
                 dc2->SetPen(line_pen);
                 int x_table[n];
@@ -1049,10 +1096,9 @@ void Project1Frm::Panel_left_down(wxMouseEvent& event)
     }  
     if (edit)
     {
-        this->SetTitle(wxString("Probuje"));
+        this->SetTitle(wxString("Edycja"));
         int* data = (*figure_array)[WxListBox2->GetSelection()]->Get();
-        int id=data[0], *points;
-        wxString x, y;
+        int id=data[0], n=data[1], x=0, y=0;
         switch(id)
         {
         case 1:
@@ -1122,8 +1168,79 @@ void Project1Frm::Panel_left_down(wxMouseEvent& event)
                 drag=true;
             }
             break;
+        
+        case 4:
+            for (int i=0; i<n; i++)
+            {
+                if ((clicked_point.x - w/2 > data[2*i+2]-10) && (clicked_point.x - w/2 < data[2*i+2]+10) && (clicked_point.y - h/2> data[2*i+3]-10) && (clicked_point.y - h/2< data[2*i+3]+10))
+                {
+                    this->SetTitle(wxString::Format("Przesuwanie punktu %d", i));
+                    drag=true;
+                    break;
+                }
+                x+=data[2*i+2];
+                y+=data[2*i+3];
+            }
+            if ((clicked_point.x - w/2> (x)/n-10) && (clicked_point.x - w/2< (x)/n+10)
+                 && (clicked_point.y - h/2 < (y)/n+10) && (clicked_point.y - h/2 > (y)/n-10))
+            {
+                this->SetTitle(wxString("Przesuwanie srodka"));
+                drag=true;
+            }
+            break;
+        
+        /*case 5:
+            if ((clicked_point.x - w/2 > data[2*n+8]-10) && (clicked_point.x - w/2 < data[2*n+8]+10) 
+                && (clicked_point.y - h/2> data[2*n+9]-10) && (clicked_point.y - h/2< data[2*n+9]+10))
+            {
+                this->SetTitle(wxString::Format("Przesuwanie œrodka"));
+                drag=true;
+                break;
+            }
+            if (
+                (  
+                    sqrt(
+                        (clicked_point.x-w/2-data[2]) * 
+                        (clicked_point.x-w/2-data[2]) + 
+                        (clicked_point.y-h/2-data[3]) * 
+                        (clicked_point.y-h/2-data[3]) 
+                        )
+                    > data[3]-10) 
+                && 
+                (  
+                    sqrt(
+                        (clicked_point.x-w/2-data[2]) * 
+                        (clicked_point.x-w/2-data[2]) + 
+                        (clicked_point.y-h/2-data[3]) * 
+                        (clicked_point.y-h/2-data[3]) 
+                        )
+                    < data[3]+10)
+                )
+            {
+                this->SetTitle(wxString::Format("Zmienianie promienia"));
+                drag=true;
+                break;
+            }
+            break;
+        
+        case 6:
+            for (int i=0; i<2; i++)
+            {
+                if ((clicked_point.x - w/2 > data[2*i+1]-10) && (clicked_point.x - w/2 < data[2*i+1]+10) && (clicked_point.y - h/2> data[2*i+2]-10) && (clicked_point.y - h/2< data[2*i+2]+10))
+                {
+                    this->SetTitle(wxString::Format("Przesuwanie punktu %d", i));
+                    drag=true;
+                    break;
+                }
+            }
+            if ((clicked_point.x - w/2> (data[1]+data[3])/2-10) && (clicked_point.x - w/2< (data[1]+data[3])/2+10)
+                 && (clicked_point.y - h/2 < (data[2]+data[4])/2+10) && (clicked_point.y - h/2 > (data[2]+data[4])/2-10))
+            {
+                this->SetTitle(wxString("Przesuwanie srodka"));
+                drag=true;
+            }
+            break;*/
         }
-        delete [] points;
                 
     }
       

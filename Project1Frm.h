@@ -26,6 +26,7 @@
 //Header Include Start and Header Include End.
 //wxDev-C++ designer will remove them. Add custom headers after the block.
 ////Header Include Start
+#include <wx/filedlg.h>
 #include <wx/colordlg.h>
 #include <wx/scrolbar.h>
 #include <wx/richtext/richtextctrl.h>
@@ -91,6 +92,8 @@ class Project1Frm : public wxFrame
 		//GUI Control Declaration Start and GUI Control Declaration End.
 		//wxDev-C++ will remove them. Add custom code after the block.
 		////GUI Control Declaration Start
+		wxFileDialog *WxOpenFileDialog1;
+		wxFileDialog *WxSaveFileDialog1;
 		wxColourDialog *WxColourDialog1;
 		wxListBox *WxListBox2;
 		wxButton *WxButton4;
