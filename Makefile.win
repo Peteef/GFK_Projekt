@@ -1,22 +1,22 @@
 # Project: Project1
 # Compiler: Default GCC compiler
 # Compiler Type: MingW 3
-# Makefile created by wxDev-C++ IDE 7.4.2.569 on 06.06.17 23:45
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 15.06.17 20:44
 
 WXLIBNAME = wxmsw29u
 CPP       = g++.exe
 CC        = gcc.exe
 WINDRES   = "windres.exe"
-OBJ       = Objects/MingW/Project1App.o Objects/MingW/Project1Frm.o Objects/MingW/Circle.o Objects/MingW/CPolygon.o Objects/MingW/FigureArray.o Objects/MingW/Line.o Objects/MingW/Polygon.o Objects/MingW/Rectangle.o Objects/MingW/Project1_private.res
-LINKOBJ   = "Objects/MingW/Project1App.o" "Objects/MingW/Project1Frm.o" "Objects/MingW/Circle.o" "Objects/MingW/CPolygon.o" "Objects/MingW/FigureArray.o" "Objects/MingW/Line.o" "Objects/MingW/Polygon.o" "Objects/MingW/Rectangle.o" Objects/MingW/Project1_private.res
-LIBS      = -L"C:/Program Files (x86)/Dev-Cpp/lib/wx/gcc_lib" -L"C:/Program Files (x86)/Dev-Cpp/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -mwindows -l$(WXLIBNAME) -l$(WXLIBNAME)_gl -lwxscintilla -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  
+OBJ       = Objects/MingW/Project1App.o Objects/MingW/Project1Frm.o Objects/MingW/Circle.o Objects/MingW/CPolygon.o Objects/MingW/FigureArray.o Objects/MingW/Line.o Objects/MingW/Polygon.o Objects/MingW/Rectangle.o Objects/MingW/BCurve.o Objects/MingW/Project1_private.res
+LINKOBJ   = "Objects/MingW/Project1App.o" "Objects/MingW/Project1Frm.o" "Objects/MingW/Circle.o" "Objects/MingW/CPolygon.o" "Objects/MingW/FigureArray.o" "Objects/MingW/Line.o" "Objects/MingW/Polygon.o" "Objects/MingW/Rectangle.o" "Objects/MingW/BCurve.o" Objects/MingW/Project1_private.res
+LIBS      = -L"C:/Program Files (x86)/Dev-Cpp/lib/wx/gcc_lib" -L"C:/Program Files (x86)/Dev-Cpp/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -mwindows -l$(WXLIBNAME) -l$(WXLIBNAME)_gl -lwxscintilla -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  -g3 
 INCS      = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
 CXXINCS   = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (x86)/Dev-Cpp/" -I"C:/Program Files (x86)/Dev-Cpp/include/common"
 RCINCS    = --include-dir "C:/PROGRA~2/Dev-Cpp/include/common"
 BIN       = Output/MingW/Project1.exe
 DEFINES   = -D__WXMSW__ -D__GNUWIN32__ -D_UNICODE
-CXXFLAGS  = $(CXXINCS) $(DEFINES)  
-CFLAGS    = $(INCS) $(DEFINES)  
+CXXFLAGS  = $(CXXINCS) $(DEFINES)   -g3
+CFLAGS    = $(INCS) $(DEFINES)   -g3
 GPROF     = gprof.exe
 ifeq ($(OS),Windows_NT)
    RM = del /Q
@@ -48,7 +48,7 @@ Objects/MingW/Circle.o: $(GLOBALDEPS) Circle.cpp Circle.h Figure.h Point.h
 Objects/MingW/CPolygon.o: $(GLOBALDEPS) CPolygon.cpp CPolygon.h Figure.h Point.h
 	$(CPP) -c CPolygon.cpp -o Objects/MingW/CPolygon.o $(CXXFLAGS)
 
-Objects/MingW/FigureArray.o: $(GLOBALDEPS) FigureArray.cpp FigureArray.h Figure.h Point.h Line.h Figure.h Circle.h Figure.h Rectangle.h Figure.h Polygon.h Figure.h CPolygon.h Figure.h
+Objects/MingW/FigureArray.o: $(GLOBALDEPS) FigureArray.cpp FigureArray.h Figure.h Point.h Line.h Figure.h Circle.h Figure.h Rectangle.h Figure.h Polygon.h Figure.h CPolygon.h Figure.h BCurve.h Figure.h
 	$(CPP) -c FigureArray.cpp -o Objects/MingW/FigureArray.o $(CXXFLAGS)
 
 Objects/MingW/Line.o: $(GLOBALDEPS) Line.cpp Line.h Figure.h Point.h
@@ -60,5 +60,8 @@ Objects/MingW/Polygon.o: $(GLOBALDEPS) Polygon.cpp Polygon.h Figure.h Point.h
 Objects/MingW/Rectangle.o: $(GLOBALDEPS) Rectangle.cpp Rectangle.h Figure.h Point.h
 	$(CPP) -c Rectangle.cpp -o Objects/MingW/Rectangle.o $(CXXFLAGS)
 
+Objects/MingW/BCurve.o: $(GLOBALDEPS) BCurve.cpp BCurve.h Figure.h Point.h
+	$(CPP) -c BCurve.cpp -o Objects/MingW/BCurve.o $(CXXFLAGS)
+
 Objects/MingW/Project1_private.res: Objects/MingW/Project1_private.rc Project1App.rc 
-	$(WINDRES) --input-format=rc -o Objects/MingW/Project1_private.res $(RCINCS) Objects/MingW/PROJEC~1.RC -O coff
+	$(WINDRES) --input-format=rc -o Objects/MingW/Project1_private.res $(RCINCS) Objects/MingW/Project1_private.rc -O coff

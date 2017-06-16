@@ -1,7 +1,7 @@
 [Project]
 FileName=Project1.dev
 Name=Project1
-UnitCount=20
+UnitCount=22
 PchHead=-1
 PchSource=-1
 Ver=3
@@ -225,9 +225,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit21]
-FileName=GFK_Projekt-master\Rectangle.h
+FileName=BCurve.cpp
 CompileCpp=1
-Folder=Project1
+Folder=Project1/Line.h
 Compile=1
 Link=1
 Priority=1000
@@ -288,6 +288,16 @@ BuildCmd=
 FileName=Polygon.h
 CompileCpp=1
 Folder=Project1/Project1App.h
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit22]
+FileName=BCurve.h
+CompileCpp=1
+Folder=Project1/Line.h
 Compile=1
 Link=1
 Priority=1000

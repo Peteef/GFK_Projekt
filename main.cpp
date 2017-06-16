@@ -25,11 +25,6 @@ int main()
 	arr.AddCPolygon(100, 100, 20, 5, 34, 34, 34, 34, 34, 34);
 	arr.Get()[4]->Get();
 
-	int coordB[8] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-	arr.AddBCurve(coordB, 4, 12, 13, 14);
-	arr.Get()[5]->Get();
-
 	for(int i = 0; i < arr.Size(); i++)
 	{
 		std::cout << arr.Get()[i] << std::endl;

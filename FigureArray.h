@@ -8,6 +8,7 @@ class FigureArray
 {
 public:
 	FigureArray();
+	~FigureArray();
 
 	std::vector<Figure*> Get() const;
 	Figure* operator[](int index);
@@ -20,6 +21,9 @@ public:
 	void AddCPolygon(int x, int y, int radius, int n, int r, int g, int b, int R, int G, int B);
 	void AddBCurve(int* coordTab, int n, int r, int g, int b);
 
+    //usuwanie
+    int Drop(int index);
+    
 	//Wielkosc
 	int Size() const;
 

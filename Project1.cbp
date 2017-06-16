@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Project1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="Project1" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Unit filename="CPolygon.cpp" />
+		<Unit filename="CPolygon.h" />
+		<Unit filename="Circle.cpp" />
+		<Unit filename="Circle.h" />
+		<Unit filename="Figure.h" />
+		<Unit filename="FigureArray.cpp" />
+		<Unit filename="FigureArray.h" />
+		<Unit filename="Line.cpp" />
+		<Unit filename="Line.h" />
+		<Unit filename="Point.h" />
+		<Unit filename="Polygon.cpp" />
+		<Unit filename="Polygon.h" />
+		<Unit filename="Project1App.cpp" />
+		<Unit filename="Project1App.h" />
+		<Unit filename="Project1App.rc">
+			<Option compilerVar="CPP" />
+		</Unit>
+		<Unit filename="Project1Frm.cpp" />
+		<Unit filename="Project1Frm.h" />
+		<Unit filename="Project1Frm.wxform" />
+		<Unit filename="Rectangle.cpp" />
+		<Unit filename="Rectangle.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

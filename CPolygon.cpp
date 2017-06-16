@@ -21,8 +21,8 @@ CPolygon::CPolygon(int x, int y, int radius, int n, int r, int g, int b, int R, 
 
 
 	double angle = 0;
-	int step = (double)radius / n;
-	data = new int[2 * n + 8];
+	int step = 360.0 / n;
+	data = new int[2 * n + 11];
 
 	data[0] = ID;
 	data[1] = n;
@@ -41,6 +41,10 @@ CPolygon::CPolygon(int x, int y, int radius, int n, int r, int g, int b, int R, 
 	data[2 * n + 5] = R;
 	data[2 * n + 6] = G;
 	data[2 * n + 7] = B;
+	
+	data[2 * n + 8] = p.GetX();
+	data[2 * n + 9] = p.GetY();
+	data[2 * n + 10] = radius;
 }
 
 int* CPolygon::Get()
@@ -50,5 +54,5 @@ int* CPolygon::Get()
 
 void CPolygon::GetStream(std::ostream& ostr)
 {
-	ostr << ID << " " << p.GetX() << " " << p.GetY() << " " << radius << " " << n << " " << r << " " << g << " " << b << " " << R << " " << G << " " << B;
+	ostr << ID << " " << data[2 * n + 8] << " " << data[2 * n + 9] << " " << data[2 * n + 10] << " " << n << " " << r << " " << g << " " << b << " " << R << " " << G << " " << B;
 }

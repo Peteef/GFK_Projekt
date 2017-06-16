@@ -17,6 +17,27 @@ FigureArray::FigureArray()
 	size = 0;
 }
 
+FigureArray::~FigureArray()
+{
+    for (int i=0; i<size; i++)
+        delete array[i];
+}
+
+int FigureArray::Drop(int index)
+{
+    try
+    {
+        delete array[index];
+        array.erase(array.begin()+index);
+        size--;
+        return 0;
+    }
+    catch(...)
+    {
+        return 1;
+    }
+}
+
 std::vector<Figure*> FigureArray::Get() const
 {
 	return array;

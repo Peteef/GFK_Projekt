@@ -26,8 +26,9 @@
 //Header Include Start and Header Include End.
 //wxDev-C++ designer will remove them. Add custom headers after the block.
 ////Header Include Start
-#include <wx/richtext/richtextctrl.h>
 #include <wx/colordlg.h>
+#include <wx/scrolbar.h>
+#include <wx/richtext/richtextctrl.h>
 #include <wx/stattext.h>
 #include <wx/listbox.h>
 #include <wx/tglbtn.h>
@@ -39,12 +40,14 @@
 #include "FigureArray.h"
 #include "Circle.h"
 #include "Line.h"
+#include <cstring>
 
 ////Dialog Style Start
 #undef Project1Frm_STYLE
 #define Project1Frm_STYLE wxCAPTION | wxRESIZE_BORDER | wxSYSTEM_MENU | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | wxCLOSE_BOX
 ////Dialog Style End
 
+using namespace std;
 class Project1Frm : public wxFrame
 {
 	private:
@@ -75,19 +78,30 @@ class Project1Frm : public wxFrame
 		void WxToggleButton6Click(wxCommandEvent& event);
 		void WxRichTextCtrl1BufferReset(wxRichTextEvent& event);
 		void WxRichTextCtrl1Enter0(wxCommandEvent& event);
+		void Panel_left_up(wxMouseEvent& event);
+		void Panel_left_down(wxMouseEvent& event);
+		void WxRichTextCtrl1Enter1(wxCommandEvent& event);
+		void WxButton4Click(wxCommandEvent& event);
+		int Bezier_value(int* points, int n, double t);
+		int Newton_symbol(int n, int k);
+		
 		
 	private:
 		//Do not add custom control declarations between
 		//GUI Control Declaration Start and GUI Control Declaration End.
 		//wxDev-C++ will remove them. Add custom code after the block.
 		////GUI Control Declaration Start
-		wxRichTextCtrl *WxRichTextCtrl1;
-		wxToggleButton *WxToggleButton6;
-		wxListBox *WxListBox2;
 		wxColourDialog *WxColourDialog1;
+		wxListBox *WxListBox2;
+		wxButton *WxButton4;
+		wxScrollBar *WxScrollBar1;
+		wxBoxSizer *WxBoxSizer9;
 		wxStaticText *WxStaticText3;
 		wxStaticText *WxStaticText2;
 		wxBoxSizer *WxBoxSizer11;
+		wxRichTextCtrl *WxRichTextCtrl1;
+		wxStaticText *WxStaticText1;
+		wxBoxSizer *WxBoxSizer10;
 		wxListBox *WxListBox1;
 		wxBoxSizer *WxBoxSizer8;
 		wxButton *WxButton3;
@@ -97,6 +111,7 @@ class Project1Frm : public wxFrame
 		wxToggleButton *WxToggleButton4;
 		wxToggleButton *WxToggleButton3;
 		wxBoxSizer *WxBoxSizer5;
+		wxToggleButton *WxToggleButton6;
 		wxToggleButton *WxToggleButton2;
 		wxToggleButton *WxToggleButton1;
 		wxBoxSizer *WxBoxSizer4;
@@ -114,10 +129,15 @@ class Project1Frm : public wxFrame
 		int toggled_button;
 		wxPoint clicked_point;
 		bool drawing;
+		bool edit;
+		bool drag;
+		
 		FigureArray* figure_array;
+		std::vector<wxPoint> points;
 		int w;
 		int h;
 		int N;
+		int click_counter;
 		
 	private:
 		//Note: if you receive any error with these enum IDs, then you need to
@@ -127,16 +147,19 @@ class Project1Frm : public wxFrame
 		enum
 		{
 			////GUI Enum Control ID Start
-			ID_WXRICHTEXTCTRL1 = 1078,
-			ID_WXTOGGLEBUTTON6 = 1077,
 			ID_WXLISTBOX2 = 1075,
+			ID_WXBUTTON4 = 1081,
+			ID_WXSCROLLBAR1 = 1080,
 			ID_WXSTATICTEXT3 = 1074,
 			ID_WXSTATICTEXT2 = 1073,
+			ID_WXRICHTEXTCTRL1 = 1085,
+			ID_WXSTATICTEXT1 = 1084,
 			ID_WXLISTBOX1 = 1068,
 			ID_WXBUTTON3 = 1056,
 			ID_WXTOGGLEBUTTON5 = 1054,
 			ID_WXTOGGLEBUTTON4 = 1052,
 			ID_WXTOGGLEBUTTON3 = 1051,
+			ID_WXTOGGLEBUTTON6 = 1077,
 			ID_WXTOGGLEBUTTON2 = 1049,
 			ID_WXTOGGLEBUTTON1 = 1048,
 			ID_WXBUTTON2 = 1045,
@@ -151,5 +174,10 @@ class Project1Frm : public wxFrame
 		void OnClose(wxCloseEvent& event);
 		void CreateGUIControls();
 };
+
+/*string operator+(string l, string r)
+{
+    return l+r;
+}   */
 
 #endif

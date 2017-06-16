@@ -10,6 +10,7 @@
 
 #include "Project1Frm.h"
 #include <wx/dcbuffer.h>
+#include <cstdlib>
 
 //Do not add custom headers between
 //Header Include Start and Header Include End
@@ -31,16 +32,17 @@ BEGIN_EVENT_TABLE(Project1Frm,wxFrame)
 	EVT_MOTION(Project1Frm::Project1FrmMouseMotion)
 	EVT_LEFT_DOWN(Project1Frm::Project1FrmLeftDown)
 	EVT_LEFT_UP(Project1Frm::Project1FrmLeftUP)
-	EVT_TEXT_ENTER(ID_WXRICHTEXTCTRL1,Project1Frm::WxRichTextCtrl1Enter0)
-	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON6,Project1Frm::WxToggleButton6Click)
 	EVT_LISTBOX(ID_WXLISTBOX2,Project1Frm::WxListBox2Selected)
 	EVT_LISTBOX_DCLICK(ID_WXLISTBOX2,Project1Frm::WxListBox2DoubleClicked)
+	EVT_BUTTON(ID_WXBUTTON4,Project1Frm::WxButton4Click)
+	EVT_TEXT_ENTER(ID_WXRICHTEXTCTRL1,Project1Frm::WxRichTextCtrl1Enter1)
 	EVT_LISTBOX(ID_WXLISTBOX1,Project1Frm::WxListBox1Selected)
 	EVT_LISTBOX_DCLICK(ID_WXLISTBOX1,Project1Frm::WxListBox1DoubleClicked)
 	EVT_BUTTON(ID_WXBUTTON3,Project1Frm::WxButton3Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON5,Project1Frm::WxToggleButton5Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON4,Project1Frm::WxToggleButton4Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON3,Project1Frm::WxToggleButton3Click)
+	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON6,Project1Frm::WxToggleButton6Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON2,Project1Frm::WxToggleButton2Click)
 	EVT_TOGGLEBUTTON(ID_WXTOGGLEBUTTON1,Project1Frm::WxToggleButton1Click)
 	
@@ -70,7 +72,7 @@ void Project1Frm::CreateGUIControls()
 	this->SetSizer(WxBoxSizer1);
 	this->SetAutoLayout(true);
 
-	WxPanel1 = new wxPanel(this, ID_WXPANEL1, wxPoint(5, 129), wxSize(316, 186));
+	WxPanel1 = new wxPanel(this, ID_WXPANEL1, wxPoint(5, 151), wxSize(316, 186));
 	WxPanel1->SetBackgroundColour(wxColour(_("WHITE")));
 	WxBoxSizer1->Add(WxPanel1, 1, wxALIGN_LEFT | wxALIGN_RIGHT | wxALIGN_TOP | wxALIGN_BOTTOM | wxALIGN_CENTER | wxEXPAND | wxALL, 5);
 
@@ -94,6 +96,9 @@ void Project1Frm::CreateGUIControls()
 
 	WxToggleButton2 = new wxToggleButton(this, ID_WXTOGGLEBUTTON2, _("Okrag"), wxPoint(90, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxToggleButton2"));
 	WxBoxSizer4->Add(WxToggleButton2, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxToggleButton6 = new wxToggleButton(this, ID_WXTOGGLEBUTTON6, _("Prostokat"), wxPoint(175, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxToggleButton6"));
+	WxBoxSizer4->Add(WxToggleButton6, 0, wxALIGN_CENTER | wxALL, 5);
 
 	WxBoxSizer5 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer5, 0, wxALIGN_CENTER | wxALL, 5);
@@ -123,6 +128,19 @@ void Project1Frm::CreateGUIControls()
 	WxListBox1 = new wxListBox(this, ID_WXLISTBOX1, wxPoint(5, 5), wxSize(142, 150), arrayStringFor_WxListBox1, wxLB_SINGLE);
 	WxBoxSizer8->Add(WxListBox1, 0, wxALIGN_CENTER | wxALL, 5);
 
+	WxBoxSizer10 = new wxBoxSizer(wxVERTICAL);
+	WxBoxSizer8->Add(WxBoxSizer10, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxStaticText1 = new wxStaticText(this, ID_WXSTATICTEXT1, _("Podaj N\ni wcisnij enter"), wxPoint(5, 5), wxDefaultSize, 0, _("WxStaticText1"));
+	WxBoxSizer10->Add(WxStaticText1, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxRichTextCtrl1 = new wxRichTextCtrl(this, ID_WXRICHTEXTCTRL1, _(""), wxPoint(25, 34), wxSize(89, 49), 0, wxDefaultValidator, _("WxRichTextCtrl1"));
+	WxRichTextCtrl1->SetMaxLength(0);
+	WxRichTextCtrl1->AppendText(_("5"));
+	WxRichTextCtrl1->SetFocus();
+	WxRichTextCtrl1->SetInsertionPointEnd();
+	WxBoxSizer10->Add(WxRichTextCtrl1, 0, wxALIGN_CENTER | wxALL, 5);
+
 	WxBoxSizer11 = new wxBoxSizer(wxHORIZONTAL);
 	WxBoxSizer2->Add(WxBoxSizer11, 0, wxALIGN_CENTER | wxALL, 5);
 
@@ -132,20 +150,21 @@ void Project1Frm::CreateGUIControls()
 	WxStaticText3 = new wxStaticText(this, ID_WXSTATICTEXT3, _("y = 0       "), wxPoint(68, 5), wxDefaultSize, 0, _("WxStaticText3"));
 	WxBoxSizer11->Add(WxStaticText3, 0, wxALIGN_CENTER | wxALL, 5);
 
-	WxColourDialog1 =  new wxColourDialog(this);
+	WxBoxSizer9 = new wxBoxSizer(wxHORIZONTAL);
+	WxBoxSizer2->Add(WxBoxSizer9, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxScrollBar1 = new wxScrollBar(this, ID_WXSCROLLBAR1, wxPoint(5, 9), wxSize(201, 17), wxSB_HORIZONTAL, wxDefaultValidator, _("WxScrollBar1"));
+	WxScrollBar1->Enable(false);
+	WxBoxSizer9->Add(WxScrollBar1, 0, wxALIGN_CENTER | wxALL, 5);
+
+	WxButton4 = new wxButton(this, ID_WXBUTTON4, _("Usuñ"), wxPoint(216, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxButton4"));
+	WxBoxSizer9->Add(WxButton4, 0, wxALIGN_CENTER | wxALL, 5);
 
 	wxArrayString arrayStringFor_WxListBox2;
-	WxListBox2 = new wxListBox(this, ID_WXLISTBOX2, wxPoint(606, 173), wxSize(121, 97), arrayStringFor_WxListBox2, wxLB_SINGLE);
+	WxListBox2 = new wxListBox(this, ID_WXLISTBOX2, wxPoint(653, 196), wxSize(180, 97), arrayStringFor_WxListBox2, wxLB_SINGLE);
 	WxBoxSizer1->Add(WxListBox2, 0, wxALIGN_LEFT | wxALIGN_RIGHT | wxALIGN_TOP | wxALIGN_BOTTOM | wxEXPAND | wxALL, 5);
 
-	WxToggleButton6 = new wxToggleButton(this, ID_WXTOGGLEBUTTON6, _("Prostokat"), wxPoint(175, 5), wxSize(75, 25), 0, wxDefaultValidator, _("WxToggleButton6"));
-	WxBoxSizer4->Add(WxToggleButton6, 0, wxALIGN_CENTER | wxALL, 5);
-
-	WxRichTextCtrl1 = new wxRichTextCtrl(this, ID_WXRICHTEXTCTRL1, _(""), wxPoint(157, 59), wxSize(88, 50), 0, wxDefaultValidator, _("WxRichTextCtrl1"));
-	WxRichTextCtrl1->SetMaxLength(0);
-	WxRichTextCtrl1->SetFocus();
-	WxRichTextCtrl1->SetInsertionPointEnd();
-	WxBoxSizer8->Add(WxRichTextCtrl1, 0, wxALIGN_CENTER | wxALL, 5);
+	WxColourDialog1 =  new wxColourDialog(this);
 
 	SetTitle(_("Project1"));
 	SetIcon(wxNullIcon);
@@ -160,11 +179,15 @@ void Project1Frm::CreateGUIControls()
 	figure_array = new FigureArray();
 	toggled_button=0;
 	drawing = false;
+	edit=false;
+	drag=false;
 	WxPanel1->Bind(wxEVT_MOTION, &Project1Frm::Panel_mouse_motion, this);
-	WxPanel1->Bind(wxEVT_LEFT_DOWN, &Project1Frm::Project1FrmLeftDown, this);
-	WxPanel1->Bind(wxEVT_LEFT_UP, &Project1Frm::Project1FrmLeftUP, this);
+	WxPanel1->Bind(wxEVT_LEFT_DOWN, &Project1Frm::Panel_left_down, this);
+	WxPanel1->Bind(wxEVT_LEFT_UP, &Project1Frm::Panel_left_up, this);
 	//WxListBox1->Show(0);
 	N=5;
+	click_counter = -1;
+
 	
 }
 
@@ -212,16 +235,19 @@ void Project1Frm::WxToggleButton1Click(wxCommandEvent& event)
 {
     if(WxToggleButton1->GetValue())
     {
+        edit=false;
         WxToggleButton2->SetValue(0);
         WxToggleButton3->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-    	wxString items[3]={"kolor lini","start","stop"};
+        WxScrollBar1->Disable();
+    	wxString items[1]={"kolor lini"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(3,items,0);
+        WxListBox1->InsertItems(1,items,0);
         toggled_button=1;
         fill_color.GetColour().Set(0,0,0,0);
+        Draw();
     }
     else
         toggled_button=0;
@@ -235,16 +261,19 @@ void Project1Frm::WxToggleButton2Click(wxCommandEvent& event)
 {
     if(WxToggleButton2->GetValue())
     {
+        edit=false;
     	WxToggleButton1->SetValue(0);
         WxToggleButton3->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-    	wxString items[3]={"kolor lini","kolor wypelnienia","start"};
+        WxScrollBar1->Disable();
+    	wxString items[2]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(3,items,0);
+        WxListBox1->InsertItems(2,items,0);
         toggled_button=2;
         fill_color.GetColour().Set(0,0,0,0);
+        Draw();
     }
     else
         toggled_button=0;
@@ -255,23 +284,7 @@ void Project1Frm::WxToggleButton2Click(wxCommandEvent& event)
  */
 void Project1Frm::WxListBox1Selected(wxCommandEvent& event)
 {
-	// insert your code here
-	/*wxString s;
-	s += "Podaj ";
-	s += WxListBox1->GetString(WxListBox1->GetSelection());
-    
-    if(WxListBox1->GetSelection()== 0 )
-        s+=" r,g,b\nlub wybierz z palety";
-    
-    if(!WxToggleButton1->GetValue() && !WxToggleButton3->GetValue() && WxListBox1->GetSelection()== 1)
-    {
-        s+=" r,g,b\nlub wybierz z palety";
-    }
-    
-	s += ":";
-	WxStaticText1->SetLabel(s);
-	Layout();
-	*/
+
 }
 
 /*
@@ -281,16 +294,19 @@ void Project1Frm::WxToggleButton3Click(wxCommandEvent& event)
 {
     if(WxToggleButton3->GetValue())
     {
+        edit=false;
     	WxToggleButton1->SetValue(0);
         WxToggleButton2->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-    	wxString items[5]={"kolor lini","start","stop", "p1", "p2"};
+        WxScrollBar1->Disable();
+    	wxString items[1]={"kolor lini"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(5,items,0);
+        WxListBox1->InsertItems(1,items,0);
         toggled_button=3;
         fill_color.GetColour().Set(0,0,0,0);
+        Draw();
     }
     else
         toggled_button=0;
@@ -303,18 +319,22 @@ void Project1Frm::WxToggleButton4Click(wxCommandEvent& event)
 {
     if(WxToggleButton4->GetValue())
     {
+        edit=false;
     	WxToggleButton1->SetValue(0);
         WxToggleButton2->SetValue(0);
         WxToggleButton3->SetValue(0);
         WxToggleButton5->SetValue(0);
         WxToggleButton6->SetValue(0);
-    	wxString items[5]={"kolor lini","kolor wypelnienia","N","przeklikaj punkty"};
+        WxScrollBar1->Disable();
+    	wxString items[5]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(5,items,0);
+        WxListBox1->InsertItems(2,items,0);
         toggled_button=4;
         fill_color.GetColour().Set(0,0,0,0);
         WxRichTextCtrl1->Show(1);
         Layout();
+        Draw();
+        click_counter=0;
     }
     else
         toggled_button=0;
@@ -332,11 +352,14 @@ void Project1Frm::WxToggleButton5Click(wxCommandEvent& event)
         WxToggleButton3->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton6->SetValue(0);
-    	wxString items[4]={"kolor lini","kolor wypelnienia","srodek okregu","promien"};
+        WxScrollBar1->Disable();
+    	wxString items[2]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(4,items,0);
+        WxListBox1->InsertItems(2,items,0);
         toggled_button=5;
         fill_color.GetColour().Set(0,0,0,0);
+        edit=false;
+        Draw();
     }
     else
         toggled_button=0;
@@ -346,44 +369,6 @@ void Project1Frm::WxToggleButton5Click(wxCommandEvent& event)
  */
 void Project1Frm::Project1FrmLeftDown(wxMouseEvent& event)
 {
-    wxString str;
-    str = wxString::Format("x = %d,  y = %d",event.m_x, event.m_y);
-	this->SetTitle(str);
-	WxPanel1->GetSize(&w,&h);
-	clicked_point.x=event.m_x;
-	clicked_point.y=event.m_y;
-	switch(toggled_button)
-	{
-        case 1:
-            {
-                drawing = true;
-                wxColour lcolor = line_color.GetColour();
-                figure_array->AddLine(clicked_point.x - w/2, clicked_point.y - h/2, clicked_point.x - w/2, clicked_point.y - h/2, lcolor.Red(), lcolor.Green(), lcolor.Blue());
-            }
-            break;
-        case 2:
-            {
-                drawing = true;
-                wxColour lcolor = line_color.GetColour();
-                wxColour fcolor = fill_color.GetColour();
-                if (fcolor.Alpha() == 0)
-                    figure_array->AddCircle(clicked_point.x - w/2, clicked_point.y - h/2, 0, lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
-                else
-                    figure_array->AddCircle(clicked_point.x - w/2, clicked_point.y - h/2, 0, lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
-            }
-            break;
-        case 6:
-            {
-                drawing = true;
-                wxColour lcolor = line_color.GetColour();
-                wxColour fcolor = fill_color.GetColour();
-                if (fcolor.Alpha() == 0)
-                    figure_array->AddRectangle(clicked_point.x - w/2, clicked_point.y - h/2,clicked_point.x - w/2, clicked_point.y - h/2,lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
-                else
-                    figure_array->AddRectangle(clicked_point.x - w/2, clicked_point.y - h/2,clicked_point.x - w/2, clicked_point.y - h/2,lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
-            }
-            break;
-    }
 }
 
 /*
@@ -391,8 +376,6 @@ void Project1Frm::Project1FrmLeftDown(wxMouseEvent& event)
  */
 void Project1Frm::Project1FrmLeftUP(wxMouseEvent& event)
 {
-    drawing = false;
-    Draw();
 }
 
 void Project1Frm::Draw()
@@ -416,24 +399,66 @@ void Project1Frm::Draw()
     std::vector<Figure*> figure_vector = figure_array->Get();
     int id;
     int* data;
+    if(!edit)
+        WxListBox2->Clear();
     for(int i=0;i<figure_array->Size();i++)
     {
         data = figure_vector[i]->Get();
         id = data[0];
+        string str;
+        int a;
+        char b[10], c[10];
         switch(id)
         {
             case 1:
                 {
+                    str="Line (";
+                    a=data[1];
+                    itoa(a, b, 10);
+                    str+= string(b) + ", ";
+                    a=data[2];
+                    itoa(a, c, 10);
+                    str+=string(c)+")";
+                    
                     wxColour lcolour(data[5],data[6],data[7]);
                     wxPen line_pen(lcolour);
+                    
+                    //edycja
+                    if(edit && WxListBox2->GetSelection()==i)
+                    {
+                        line_pen.SetWidth(3);
+                        wxPen pomPen(wxColour(255, 0, 0));
+                        dc2->SetPen(pomPen);
+                        dc2->DrawCircle(data[1], data[2], 10);
+                        dc2->DrawCircle(data[3], data[4], 10);
+                        dc2->DrawCircle((data[1]+data[3])/2, (data[2]+data[4])/2, 10);
+                    }
                     dc2->SetPen(line_pen);
                     dc2->DrawLine(data[1],data[2],data[3],data[4]);
                 }
                 break;
             case 2:
                 {
+                    str="Circle (";
+                    a=data[1];
+                    itoa(a, b, 10);
+                    str+= string(b) + ", ";
+                    a=data[2];
+                    itoa(a, c, 10);
+                    str+=string(c)+")";
+                    
                     wxColour lcolour(data[4],data[5],data[6]);
                     wxPen line_pen(lcolour);
+                    //edycja
+                    if(edit && WxListBox2->GetSelection()==i)
+                    {
+                        line_pen.SetWidth(3);
+                        wxPen pomPen(wxColour(255, 0, 0));
+                        dc2->SetPen(pomPen);
+                        dc2->DrawCircle(data[1], data[2], 10);
+                        dc2->DrawCircle(data[1]+data[3], data[2], 10);
+                    }
+
                     dc2->SetPen(line_pen);
                     if(data[7]!=-1)
                     {
@@ -449,8 +474,27 @@ void Project1Frm::Draw()
                 break;
             case 3:
                 {
+                    str="Rectangle (";
+                    a=data[1];
+                    itoa(a, b, 10);
+                    str+= string(b) + ", ";
+                    a=data[2];
+                    itoa(a, c, 10);
+                    str+=string(c)+")";
+                    
                     wxColour lcolour(data[5],data[6],data[7]);
                     wxPen line_pen(lcolour);
+                    //edycja
+                    if(edit && WxListBox2->GetSelection()==i)
+                    {
+                        line_pen.SetWidth(3);
+                        wxPen pomPen(wxColour(255, 0, 0));
+                        dc2->SetPen(pomPen);
+                        dc2->DrawCircle(data[1], data[2], 10);
+                        dc2->DrawCircle(data[3], data[4], 10);
+                        dc2->DrawCircle((data[1]+data[3])/2, (data[2]+data[4])/2, 10);
+                    }
+                        
                     dc2->SetPen(line_pen);
                     if(data[8]!=-1)
                     {
@@ -465,9 +509,121 @@ void Project1Frm::Draw()
                     
                 }
                 break;
+            case 4:
+                {
+                    int n = data[1];
+                    str="Polygon (";
+                    a=data[1];
+                    itoa(a, b, 10);
+                    str+= string(b) + ", ";
+                    //a=data[2];
+                    //itoa(a, c, 10);
+                    str+=string(c)+")";
+                    
+                    wxColour lcolour(data[5],data[6],data[7]);
+                    wxPen line_pen(lcolour);
+                    //edycja
+                    if(edit && WxListBox2->GetSelection()==i)
+                    {
+                        line_pen.SetWidth(3);
+                        wxPen pomPen(wxColour(255, 0, 0));
+                        dc2->SetPen(pomPen);
+                        dc2->DrawCircle(data[1], data[2], 10);
+                        dc2->DrawCircle(data[3], data[4], 10);
+                        dc2->DrawCircle(data[1]-data[3], data[2]-data[4], 10);
+                    }
+                        
+                    dc2->SetPen(line_pen);
+                    if(data[2*n+5]!=-1)
+                    {
+                        wxColour fcolour(data[2*n+5],data[2*n+6],data[2*n+7]);
+                        wxBrush fill_brush(fcolour);
+                        dc2->SetBrush(fill_brush);
+                    }
+                    else
+                        dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                    
+                    for(int i = 1; i < n; i++)
+                    {
+                        dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
+                    }
+                    dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
+                    
+                }
+                break;
+            case 5:
+            {
+                int n = data[1];
+                /*str="Polygon (";
+                a=data[1];
+                itoa(a, b, 10);
+                str+= string(b) + ", ";*/
+                
+                wxColour lcolour(data[2*n+2],data[2*n+3],data[2*n+4]);
+                wxPen line_pen(lcolour);
+                //edycja
+                if(edit && WxListBox2->GetSelection()==i)
+                    line_pen.SetWidth(3);
+                    
+                dc2->SetPen(line_pen);
+                if(data[2*n+5]!=-1)
+                {
+                    wxColour fcolour(data[2*n+5],data[2*n+6],data[2*n+7]);
+                    wxBrush fill_brush(fcolour);
+                    dc2->SetBrush(fill_brush);
+                }
+                else
+                    dc2->SetBrush(*wxTRANSPARENT_BRUSH);
+                
+                for(int i = 1; i <n; i++)
+                {
+                    dc2->DrawLine(data[i*2],data[i*2+1],data[(i+1)*2], data[(i+1)*2+1]);
+                }
+                dc2->DrawLine(data[n*2],data[n*2+1], data[2],data[3]);
+            }
+            break;
+            case 6:
+            {
+                const int n=data[1];
+                wxColour lcolour(data[2*n+2],data[2*n+3],data[2*n+4]);
+                wxPen line_pen(lcolour);
+                //edycja
+                if(edit && WxListBox2->GetSelection()==i)
+                    line_pen.SetWidth(3);
+                
+                dc2->SetPen(line_pen);
+                int x_table[n];
+                int y_table[n];
+                for(int i=0;i<n;i++)
+                {
+                    x_table[i] = data[2 * (i+1)];
+                    y_table[i] = data[2 * (i+1) + 1];
+                }
+                
+                double krok = 0.0005;
+                double t = 0;
+                while(t<=1)
+                {
+                    dc2->DrawPoint(Bezier_value(x_table,n-1,t),Bezier_value(y_table,n-1,t));
+                    t+=krok;
+                }
+                dc2->SetPen(*wxRED_PEN);
+                dc2->SetBrush(*wxRED_BRUSH);
+                for(int i=0;i<n+1;i++)
+                    dc2->DrawCircle(x_table[i],y_table[i],2);
+            }
+            break;
         }
+        if(!edit)
+            WxListBox2->Append(str);
     }
-    
+    if(!points.empty())
+    {
+        dc2->SetPen(*wxRED_PEN);
+        dc2->SetBrush(*wxRED_BRUSH);
+        for(int i=0;i<points.size();i++)
+            dc2->DrawCircle(points[i].x, points[i].y,2);
+    }
     //dc2.SetDeviceOrigin(0,0);
     //WxPanel1->ClearBackground();
     //dc.Blit(0,0,w,h,&dc2,0,0);
@@ -495,6 +651,32 @@ void Project1Frm::WxPanel1UpdateUI(wxUpdateUIEvent& event)
         h=h_1;
         Draw();
     }
+    /*if(edit)
+    {
+        WxScrollBar1->Show(true);
+        WxButton4->Show(true);
+    }
+    else
+    {
+        WxScrollBar1->Show(false);
+        WxButton4->Show(false);
+    }*/
+    wxString str;
+    if(WxListBox2->GetSelection()!=wxNOT_FOUND)
+    {
+        str = wxString("Edycja");
+        this->SetTitle(str);
+        edit=true;
+    }
+    else
+    {
+        str = wxString("Rysowanie");
+        this->SetTitle(str);
+        edit=false;
+    }
+    
+    if(!WxToggleButton4->GetValue())
+        click_counter = -1;
 }
 
 /*
@@ -520,7 +702,15 @@ void Project1Frm::WxListBox2DoubleClicked(wxCommandEvent& event)
  */
 void Project1Frm::WxListBox2Selected(wxCommandEvent& event)
 {
-	// insert your code here
+    WxToggleButton1->SetValue(0);
+    WxToggleButton2->SetValue(0);
+    WxToggleButton3->SetValue(0);
+    WxToggleButton4->SetValue(0);
+    WxToggleButton5->SetValue(0);
+    WxToggleButton6->SetValue(0);
+    WxListBox1->Clear();
+    WxScrollBar1->Enable();
+    Draw();
 	
 }
 void Project1Frm::Panel_mouse_motion(wxMouseEvent& event)
@@ -535,27 +725,141 @@ void Project1Frm::Panel_mouse_motion(wxMouseEvent& event)
     
     WxPanel1->GetSize(&w,&h);
     
-    if(drawing)
+    if(drawing && !edit)
     {
         int* data = (*figure_array)[figure_array->Size()-1]->Get();
         int id = data[0];
         switch(id)
         {
-            case 1:
-                data[3]=event.m_x-w/2;
-                data[4]=event.m_y-h/2;
+        case 1:
+            data[3]=event.m_x-w/2;
+            data[4]=event.m_y-h/2;
+            Draw();
+            break;
+        case 2:
+            data[3]=sqrt((data[1]-event.m_x+w/2)*(data[1]-event.m_x+w/2) + (data[2]-event.m_y+h/2)*(data[2]-event.m_y+h/2));
+            Draw();
+            break;
+        case 3:
+            data[3] = event.m_x-w/2;
+            data[4] = event.m_y-h/2;
+            Draw();
+            break;    
+        case 5:
+            int n = data[1];
+            int r = sqrt((data[2 * n + 8]-event.m_x+w/2)*(data[2 * n + 8]-event.m_x+w/2) + (data[2 * n + 9]-event.m_y+h/2)*(data[2 * n + 9]-event.m_y+h/2));
+            data[2 * n + 10] = r;
+            double angle = 0;
+        	int step = 360.0 / n;
+            for(int i = 1; i <=n; i++)
+        	{
+        		data[2 * i] = r * cos(angle * (3.1415 / 180)) + data[2 * n + 8];
+        		data[2 * i + 1] = r * sin(angle * (3.1415 / 180)) + data[2 * n + 9];
+        		angle += step;
+        	}
+        	Draw();
+        	break;
+        }
+        //Draw();
+    }
+    if (drag)
+    {
+        int* data = (*figure_array)[WxListBox2->GetSelection()]->Get(), *points;
+        int id = data[0];
+        switch(id)
+        {
+        case 1:
+            points = new int[4];
+            points[0]=data[1];
+            points[1]=data[2];
+            points[2]=data[3];
+            points[3]=data[4];
+            if ((event.m_x-w/2> (data[1]+data[3])/2-10) && (event.m_x-w/2< (data[1]+data[3])/2+10)
+                && (event.m_y-h/2 < (data[2]+data[4])/2+10) && (event.m_y-h/2 > (data[2]+data[4])/2-10))
+            {
+                for (int i=0; i<2; i++)
+                {
+                    data[2*i+1]+=event.m_x-w/2-(points[0]+points[2])/2;
+                    data[2*i+2]+=event.m_y-h/2-(points[1]+points[3])/2;
+                }
+            }
+            for (int i=0; i<2; i++)
+            {
+                if ((event.m_x-w/2>data[2*i+1]-10)&&(event.m_x-w/2<data[2*i+1]+10)&&(event.m_y-h/2>data[2*i+2]-10)&&(event.m_y-h/2<data[2*i+2]+10))
+                {
+                    data[2*i+1]=event.m_x-w/2;
+                    data[2*i+2]=event.m_y-h/2;
+                    break;
+                }
+            }
+            
+            break;
+        case 2:
+            points = new int[3];
+            points[0]=data[1];
+            points[1]=data[2];
+            points[2]=data[3];
+            if ((event.m_x - w/2 > data[1]-10) && (event.m_x - w/2 < data[1]+10) 
+                && (event.m_y - h/2> data[2]-10) && (event.m_y - h/2< data[2]+10))
+            {
+                data[1]+=event.m_x-w/2-points[0];
+                data[2]+=event.m_y-h/2-points[1];
                 break;
-            case 2:
-                data[3]=sqrt((data[1]-event.m_x+w/2)*(data[1]-event.m_x+w/2) + (data[2]-event.m_y+h/2)*(data[2]-event.m_y+h/2));
+            }
+            if (
+                (  
+                    sqrt(
+                        (event.m_x-w/2-data[1]) * 
+                        (event.m_x-w/2-data[1]) + 
+                        (event.m_y-h/2-data[2]) * 
+                        (event.m_y-h/2-data[2]) 
+                        )
+                    > data[3]-10) 
+                && 
+                (  
+                    sqrt(
+                        (event.m_x-w/2-data[1]) * 
+                        (event.m_x-w/2-data[1]) + 
+                        (event.m_y-h/2-data[2]) * 
+                        (event.m_y-h/2-data[2]) 
+                        )
+                    < data[3]+10)
+                )
+            {
+                data[3]+=sqrt((event.m_x-w/2-points[0])*(event.m_x-w/2-points[0])+(event.m_y-h/2-points[1])*(event.m_y-h/2-points[1]))-data[3];
                 break;
-            case 3:
-                data[3] = event.m_x-w/2;
-                data[4] = event.m_y-h/2;
-                wxString str;
-                break;                
+            }
+            break;
+        case 3:
+            points = new int[4];
+            points[0]=data[1];
+            points[1]=data[2];
+            points[2]=data[3];
+            points[3]=data[4];
+            if ((event.m_x-w/2> (data[1]+data[3])/2-10) && (event.m_x-w/2< (data[1]+data[3])/2+10)
+                && (event.m_y-h/2 < (data[2]+data[4])/2+10) && (event.m_y-h/2 > (data[2]+data[4])/2-10))
+            {
+                for (int i=0; i<2; i++)
+                {
+                    data[2*i+1]+=event.m_x-w/2-(points[0]+points[2])/2;
+                    data[2*i+2]+=event.m_y-h/2-(points[1]+points[3])/2;
+                }
+            }
+            for (int i=0; i<2; i++)
+            {
+                if ((event.m_x-w/2>data[2*i+1]-10)&&(event.m_x-w/2<data[2*i+1]+10)&&(event.m_y-h/2>data[2*i+2]-10)&&(event.m_y-h/2<data[2*i+2]+10))
+                {
+                    data[2*i+1]=event.m_x-w/2;
+                    data[2*i+2]=event.m_y-h/2;
+                    break;
+                }
+            }
+            break;
         }
         Draw();
+        delete [] points;
     }
+    
 }
 
 /*
@@ -565,16 +869,18 @@ void Project1Frm::WxToggleButton6Click(wxCommandEvent& event)
 {
 	if(WxToggleButton6->GetValue())
     {
+        edit=false;
     	WxToggleButton1->SetValue(0);
         WxToggleButton2->SetValue(0);
         WxToggleButton3->SetValue(0);
         WxToggleButton4->SetValue(0);
         WxToggleButton5->SetValue(0);
-    	wxString items[4]={"kolor lini","kolor wypelnienia","p1","p2"};
+    	wxString items[2]={"kolor lini","kolor wypelnienia"};
     	WxListBox1->Clear();
-        WxListBox1->InsertItems(4,items,0);
+        WxListBox1->InsertItems(2,items,0);
         toggled_button=6;
         fill_color.GetColour().Set(0,0,0,0);
+        Draw();
     }
     else
         toggled_button=0;
@@ -588,13 +894,289 @@ void Project1Frm::WxRichTextCtrl1BufferReset(wxRichTextEvent& event)
 	// insert your code here
 }
 
-/*
- * WxRichTextCtrl1Enter0
- */
-void Project1Frm::WxRichTextCtrl1Enter0(wxCommandEvent& event)
+
+void Project1Frm::Panel_left_up(wxMouseEvent& event)
 {
-	// insert your code here
+    drawing = false;
+    drag = false;
+    Draw();
+}
+
+void Project1Frm::Panel_left_down(wxMouseEvent& event)
+{
+	WxPanel1->GetSize(&w,&h);
+	clicked_point.x=event.m_x;
+	clicked_point.y=event.m_y;
+	if(!edit)
+    	switch(toggled_button)
+    	{
+        case 1:
+            {
+            drawing = true;
+            edit = false;
+            wxColour lcolor = line_color.GetColour();
+            figure_array->AddLine(clicked_point.x - w/2, clicked_point.y - h/2, clicked_point.x - w/2, clicked_point.y - h/2, lcolor.Red(), lcolor.Green(), lcolor.Blue());
+            
+            //edycja
+            //if(WxListBox2->GetSelection()==i)
+            //    WxListBox2->Deselect(WxListBox2->GetSelection());
+                
+        
+            break;
+        }
+        
+        case 2:
+            {
+            drawing = true;
+            edit = false;
+            wxColour lcolor = line_color.GetColour();
+            wxColour fcolor = fill_color.GetColour();
+            if (fcolor.Alpha() == 0)
+                figure_array->AddCircle(clicked_point.x - w/2, clicked_point.y - h/2, 0, lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
+            else
+                figure_array->AddCircle(clicked_point.x - w/2, clicked_point.y - h/2, 0, lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
+                
+            //edycja
+            //if(WxListBox2->GetSelection()==i)
+            //    WxListBox2->Deselect(WxListBox2->GetSelection());
+                
+
+            break;
+        }
+        case 3:
+            {
+                edit = false;
+                if (points.size() < N)
+                {
+                    points.push_back(wxPoint(clicked_point.x - w/2,clicked_point.y - h/2));
+                }
+                if(points.size()*2 == 2*N)
+                {
+                    points.push_back(wxPoint(clicked_point.x - w/2,clicked_point.y - h/2));
+                    wxColour lcolor = line_color.GetColour();
+                    int coords[2*N];
+                    for(int i = 0; i < N; i++)
+                    {
+                        coords[2*i] = points[i].x;
+                        coords[2*i+1] = points[i].y;
+                    }
+                    figure_array->AddBCurve(coords, N, lcolor.Red(), lcolor.Green(), lcolor.Blue());
+                    points.clear();
+                    toggled_button = 0;
+                    WxToggleButton3->SetValue(0);
+                }
+            }
+            break;
+        case 4:
+        {
+            edit = false;
+            if(click_counter == 0)
+            {
+                wxColour lcolor = line_color.GetColour();
+                wxColour fcolor = fill_color.GetColour();
+                int coords[2*N];
+                for(int i = 0; i < N; i++)
+                {
+                    coords[2*i] = clicked_point.x - w/2;
+                    coords[2*i+1] = clicked_point.y - h/2;
+                }
+                if (fcolor.Alpha() == 0)
+                    figure_array->AddPolygon(coords, N, lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
+                else
+                    figure_array->AddPolygon(coords, N, lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
+                
+                click_counter++;
+                points.push_back(wxPoint(clicked_point.x - w/2,clicked_point.y - h/2));
+            }
+            else if(click_counter == N-1)
+            {
+                int* data = (*figure_array)[figure_array->Size()-1]->Get();
+                data[(click_counter+1)*2] = clicked_point.x - w/2;
+                data[(click_counter+1)*2+1] = clicked_point.y - h/2;
+                click_counter=-1;
+                toggled_button=0;
+                WxToggleButton4->SetValue(0);
+                points.clear();
+            }
+            else if(click_counter < N-1 && click_counter > 0)
+            {
+                int* data = (*figure_array)[figure_array->Size()-1]->Get();
+                data[(click_counter+1)*2] = clicked_point.x - w/2;
+                data[(click_counter+1)*2+1] = clicked_point.y - h/2;
+                click_counter++;
+                points.clear();
+            }
+
+            }
+            break;
+        case 5:
+            /*drawing_cpolygon = true;
+            edit = false;*/
+            {
+                drawing = true;
+                edit = false;
+                wxColour lcolor = line_color.GetColour();
+                wxColour fcolor = fill_color.GetColour();
+                if (fcolor.Alpha() == 0)
+                    figure_array->AddCPolygon(clicked_point.x-w/2,clicked_point.y-h/2,1,N, lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
+                else
+                    figure_array->AddCPolygon(clicked_point.x-w/2,clicked_point.y-h/2,1,N, lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
+            }
+            break;
+        case 6:
+            {
+                drawing = true;
+                edit=false;
+                wxColour lcolor = line_color.GetColour();
+                wxColour fcolor = fill_color.GetColour();
+                if (fcolor.Alpha() == 0)
+                    figure_array->AddRectangle(clicked_point.x - w/2, clicked_point.y - h/2,clicked_point.x - w/2, clicked_point.y - h/2,lcolor.Red(), lcolor.Green(), lcolor.Blue(),-1,-1,-1);
+                else
+                    figure_array->AddRectangle(clicked_point.x - w/2, clicked_point.y - h/2,clicked_point.x - w/2, clicked_point.y - h/2,lcolor.Red(), lcolor.Green(), lcolor.Blue(),fcolor.Red(), fcolor.Green(), fcolor.Blue());
+                    
+                //edycja
+                //if(WxListBox2->GetSelection()==i)
+                //    WxListBox2->Deselect(WxListBox2->GetSelection());
+                    
+            }
+            break;
+        }
+        
+    if(WxListBox2->GetSelection()!=wxNOT_FOUND)
+    {
+        edit=true;
+
+    }  
+    if (edit)
+    {
+        this->SetTitle(wxString("Probuje"));
+        int* data = (*figure_array)[WxListBox2->GetSelection()]->Get();
+        int id=data[0], *points;
+        wxString x, y;
+        switch(id)
+        {
+        case 1:
+            for (int i=0; i<2; i++)
+            {
+                if ((clicked_point.x - w/2 > data[2*i+1]-10) && (clicked_point.x - w/2 < data[2*i+1]+10) && (clicked_point.y - h/2> data[2*i+2]-10) && (clicked_point.y - h/2< data[2*i+2]+10))
+                {
+                    this->SetTitle(wxString::Format("Przesuwanie punktu %d", i));
+                    drag=true;
+                    break;
+                }
+            }
+            if ((clicked_point.x - w/2> (data[1]+data[3])/2-10) && (clicked_point.x - w/2< (data[1]+data[3])/2+10)
+                 && (clicked_point.y - h/2 < (data[2]+data[4])/2+10) && (clicked_point.y - h/2 > (data[2]+data[4])/2-10))
+            {
+                this->SetTitle(wxString("Przesuwanie srodka"));
+                drag=true;
+            }
+            break;
+        case 2:
+            if ((clicked_point.x - w/2 > data[1]-10) && (clicked_point.x - w/2 < data[1]+10) 
+                && (clicked_point.y - h/2> data[2]-10) && (clicked_point.y - h/2< data[2]+10))
+            {
+                this->SetTitle(wxString::Format("Przesuwanie œrodka"));
+                drag=true;
+                break;
+            }
+            if (
+                (  
+                    sqrt(
+                        (clicked_point.x-w/2-data[1]) * 
+                        (clicked_point.x-w/2-data[1]) + 
+                        (clicked_point.y-h/2-data[2]) * 
+                        (clicked_point.y-h/2-data[2]) 
+                        )
+                    > data[3]-10) 
+                && 
+                (  
+                    sqrt(
+                        (clicked_point.x-w/2-data[1]) * 
+                        (clicked_point.x-w/2-data[1]) + 
+                        (clicked_point.y-h/2-data[2]) * 
+                        (clicked_point.y-h/2-data[2]) 
+                        )
+                    < data[3]+10)
+                )
+            {
+                this->SetTitle(wxString::Format("Zmienianie promienia"));
+                drag=true;
+                break;
+            }
+            break;
+        case 3:
+            for (int i=0; i<2; i++)
+            {
+                if ((clicked_point.x - w/2 > data[2*i+1]-10) && (clicked_point.x - w/2 < data[2*i+1]+10) && (clicked_point.y - h/2> data[2*i+2]-10) && (clicked_point.y - h/2< data[2*i+2]+10))
+                {
+                    this->SetTitle(wxString::Format("Przesuwanie punktu %d", i));
+                    drag=true;
+                    break;
+                }
+            }
+            if ((clicked_point.x - w/2> (data[1]+data[3])/2-10) && (clicked_point.x - w/2< (data[1]+data[3])/2+10)
+                 && (clicked_point.y - h/2 < (data[2]+data[4])/2+10) && (clicked_point.y - h/2 > (data[2]+data[4])/2-10))
+            {
+                this->SetTitle(wxString("Przesuwanie srodka"));
+                drag=true;
+            }
+            break;
+        }
+        delete [] points;
+                
+    }
+      
+}
+
+/*
+ * WxRichTextCtrl1Enter1
+ */
+void Project1Frm::WxRichTextCtrl1Enter1(wxCommandEvent& event)
+{
     WxRichTextCtrl1->Remove(WxRichTextCtrl1->GetLastPosition()-1,WxRichTextCtrl1->GetLastPosition());
     wxString s = WxRichTextCtrl1->GetLineText(0);
     sscanf(s.c_str(), "%d", &N);
+    click_counter = -1;
+}
+
+int Project1Frm::Bezier_value(int* points, int n, double t)
+{
+    double sum = 0;
+    for(int i=0;i<=n;i++)
+    {
+        sum+=points[i]*pow((1-t),n-i)*pow(t,i)*Newton_symbol(n,i);
+    }
+    return sum;
+}
+
+int Project1Frm::Newton_symbol(int n, int k)
+{
+    if (k==0 || k==n)
+        return 1;
+    
+    return Newton_symbol(n-1, k-1) + Newton_symbol(n-1, k);
+}
+
+/*
+ * WxButton4Click
+ */
+void Project1Frm::WxButton4Click(wxCommandEvent& event)
+{
+	if (WxListBox2->GetSelection()!=wxNOT_FOUND)
+	{
+        if(figure_array->Drop(WxListBox2->GetSelection()))
+        {
+            this->SetTitle(wxString::Format("Blad usuwania: %d", WxListBox2->GetSelection()));
+            return;
+        }
+        else if (WxListBox2->GetSelection())
+        {
+            WxListBox2->SetSelection(WxListBox2->GetSelection()-1);
+            WxListBox2->Delete(WxListBox2->GetSelection()+1);
+        }
+        else 
+            WxListBox2->Delete(0);
+    }
+    Draw();
 }
